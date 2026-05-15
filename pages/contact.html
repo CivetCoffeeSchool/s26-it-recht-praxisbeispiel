@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontakt & Impressum – Medieval: Escape The Dungeon</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --black:       #0a0805;
+      --deep:        #110e09;
+      --surface:     #1c1710;
+      --surface2:    #252015;
+      --border:      #4a3e28;
+      --gold:        #f0b84a;
+      --gold-light:  #ffd27a;
+      --gold-dim:    #a07830;
+      --blood:       #c0392b;
+      --blood-light: #e05545;
+      --text:        #e8dcc0;
+      --text-dim:    #a89878;
+      --white:       #f8f0e0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--text);
+      font-family: 'Crimson Text', Georgia, serif;
+      font-size: 1.1rem;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; opacity: 0.5;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Uncial Antiqua', serif;
+      color: var(--gold-light);
+      letter-spacing: 0.04em;
+    }
+
+    a { color: var(--gold); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--gold-light); text-decoration: underline; }
+
+    /* ── Navbar ─────────────────────────────────────────────── */
+    .navbar {
+      background: linear-gradient(180deg, rgba(10,8,5,0.98), rgba(10,8,5,0.85));
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      position: sticky; top: 0; z-index: 1000;
+    }
+    .navbar-brand {
+      font-family: 'Uncial Antiqua', serif;
+      font-size: 1.4rem;
+      color: var(--gold-light) !important;
+      letter-spacing: 0.06em;
+    }
+    .navbar-nav .nav-link {
+      color: var(--text-dim) !important;
+      font-size: 0.95rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .navbar-nav .nav-link:hover { color: var(--gold-light) !important; }
+    .navbar-toggler { border-color: var(--border); }
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28240,184,74,0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    /* ── Page header ─────────────────────────────────────────── */
+    .page-header {
+      position: relative;
+      padding: 5rem 0 4rem;
+      text-align: center;
+      background: linear-gradient(180deg, var(--black) 0%, var(--deep) 100%);
+    }
+    .page-header::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold-dim), var(--gold), var(--gold-dim), transparent);
+    }
+    .page-header::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .page-eyebrow {
+      font-size: 0.8rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--blood-light);
+      display: block; margin-bottom: 0.75rem;
+    }
+    .page-title {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      margin-bottom: 1rem;
+      text-shadow: 0 0 40px rgba(240,184,74,0.3);
+    }
+    .page-lead {
+      color: var(--text-dim); font-style: italic;
+      font-size: 1.1rem; max-width: 580px; margin: 0 auto;
+    }
+
+    /* ── Section helpers ─────────────────────────────────────── */
+    .section { padding: 5rem 0; }
+    .section-alt { background: var(--deep); }
+    .section-label {
+      font-size: 0.78rem; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--blood-light);
+      display: block; margin-bottom: 0.4rem;
+    }
+    .section-title { font-size: clamp(1.6rem, 3vw, 2.3rem); margin-bottom: 0.5rem; }
+    .rune-divider {
+      display: flex; align-items: center; gap: 1rem;
+      margin: 0.5rem 0 1.75rem; color: var(--gold-dim);
+    }
+    .rune-divider::before, .rune-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
+    /* ── Contact info cards ──────────────────────────────────── */
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.75rem;
+      height: 100%;
+      transition: border-color 0.3s, transform 0.3s;
+      position: relative;
+    }
+    .info-card:hover { border-color: var(--gold-dim); transform: translateY(-3px); }
+    .info-card-icon {
+      font-size: 1.75rem;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .info-card-title {
+      font-size: 0.75rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--gold-dim);
+      margin-bottom: 0.4rem;
+    }
+    .info-card-value {
+      font-size: 1.05rem; color: var(--text);
+      margin: 0;
+    }
+    .info-card-sub {
+      font-size: 0.88rem; color: var(--text-dim);
+      font-style: italic; margin-top: 0.2rem;
+    }
+
+    /* ── Contact form ────────────────────────────────────────── */
+    .contact-form-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+    }
+    @media (max-width: 575px) { .contact-form-wrap { padding: 1.5rem; } }
+
+    .form-label {
+      color: var(--text);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.4rem;
+    }
+    .form-control, .form-select {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 0;
+      font-family: 'Crimson Text', serif;
+      font-size: 1rem;
+      padding: 0.65rem 0.9rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-control:focus, .form-select:focus {
+      background: var(--surface2);
+      border-color: var(--gold-dim);
+      color: var(--text);
+      box-shadow: 0 0 0 3px rgba(240,184,74,0.12);
+      outline: none;
+    }
+    .form-control::placeholder { color: var(--text-dim); opacity: 0.7; }
+    .form-select option { background: var(--surface2); color: var(--text); }
+
+    .form-check-input {
+      background-color: var(--surface2);
+      border-color: var(--border);
+      border-radius: 0;
+    }
+    .form-check-input:checked {
+      background-color: var(--gold-dim);
+      border-color: var(--gold-dim);
+    }
+    .form-check-input:focus { box-shadow: 0 0 0 3px rgba(240,184,74,0.12); }
+    .form-check-label { color: var(--text-dim); font-size: 0.95rem; }
+
+    .btn-medieval {
+      font-family: 'Crimson Text', serif;
+      font-weight: 600; font-size: 1rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.75rem 2.5rem;
+      border: 1px solid var(--gold);
+      background: linear-gradient(135deg, rgba(240,184,74,0.15), rgba(240,184,74,0.05));
+      color: var(--gold-light);
+      position: relative; overflow: hidden;
+      transition: all 0.3s;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+      cursor: pointer;
+    }
+    .btn-medieval:hover {
+      color: var(--white);
+      border-color: var(--gold-light);
+      box-shadow: 0 0 20px rgba(240,184,74,0.25);
+      background: linear-gradient(135deg, rgba(240,184,74,0.25), rgba(240,184,74,0.1));
+    }
+    .btn-medieval:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    /* Form success state */
+    .form-success {
+      display: none;
+      background: var(--surface);
+      border: 1px solid #4a9a4a;
+      border-left: 3px solid #7acc7a;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .form-success.visible { display: block; }
+    .form-success i { font-size: 2rem; color: #7acc7a; margin-bottom: 0.5rem; display: block; }
+    .form-success p { color: var(--text); margin: 0; }
+
+    /* Field character counter */
+    .char-count {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      text-align: right;
+      margin-top: 0.2rem;
+    }
+
+    /* ── Topic buttons ───────────────────────────────────────── */
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+    .topic-btn {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      font-family: 'Crimson Text', serif;
+      font-size: 0.9rem;
+      padding: 0.55rem 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .topic-btn:hover, .topic-btn.active {
+      border-color: var(--gold-dim);
+      color: var(--gold-light);
+      background: rgba(240,184,74,0.06);
+    }
+    .topic-btn.active { border-color: var(--gold); }
+
+    /* ── FAQ ─────────────────────────────────────────────────── */
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-family: 'Crimson Text', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-align: left;
+      padding: 1rem 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      transition: color 0.2s;
+    }
+    .faq-question:hover { color: var(--gold-light); }
+    .faq-question:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+    .faq-question i { flex-shrink: 0; color: var(--gold-dim); transition: transform 0.3s; }
+    .faq-question[aria-expanded="true"] i { transform: rotate(45deg); color: var(--gold); }
+    .faq-answer {
+      color: var(--text-dim);
+      font-size: 1rem;
+      padding-bottom: 1.25rem;
+      display: none;
+    }
+    .faq-answer.open { display: block; }
+
+    /* ── Impressum ───────────────────────────────────────────── */
+    .impressum-section {
+      background: var(--deep);
+      padding: 5rem 0;
+      position: relative;
+    }
+    .impressum-section::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
+    .impressum-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .impressum-block h3 {
+      font-size: 1rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .impressum-table { width: 100%; }
+    .impressum-table td {
+      padding: 0.45rem 0;
+      font-size: 0.97rem;
+      vertical-align: top;
+    }
+    .impressum-table td:first-child {
+      color: var(--text-dim);
+      width: 42%;
+      font-weight: 600;
+    }
+    .impressum-table td:last-child { color: var(--text); }
+
+    .legal-notice {
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold-dim);
+      background: var(--surface);
+      padding: 1.25rem 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .legal-notice p { color: var(--text-dim); font-size: 0.92rem; margin: 0; }
+    .legal-notice p + p { margin-top: 0.6rem; }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0 1.5rem;
+    }
+    .footer-brand { font-family: 'Uncial Antiqua', serif; font-size: 1.2rem; color: var(--gold-light); }
+    .footer-links { list-style: none; padding: 0; margin: 0; }
+    .footer-links li { margin-bottom: 0.35rem; }
+    .footer-links a { color: var(--text-dim); font-size: 0.9rem; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-heading { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.75rem; }
+    .footer-bottom { border-top: 1px solid var(--border); margin-top: 2rem; padding-top: 1rem; font-size: 0.82rem; color: var(--text-dim); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.6s ease forwards; }
+    .delay-1 { animation-delay: 0.1s; opacity: 0; }
+    .delay-2 { animation-delay: 0.25s; opacity: 0; }
+    .delay-3 { animation-delay: 0.4s; opacity: 0; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════ NAVBAR ═══════════════════════ -->
+<nav class="navbar navbar-expand-lg" aria-label="Hauptnavigation">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">
+      <svg width="26" height="26" viewBox="0 0 36 36" fill="none" aria-hidden="true" style="margin-right:0.4rem">
+        <path d="M18 2 L34 8 L34 20 Q34 30 18 34 Q2 30 2 20 L2 8 Z" fill="none" stroke="#f0b84a" stroke-width="1.5"/>
+        <line x1="18" y1="8" x2="18" y2="29" stroke="#f0b84a" stroke-width="1"/>
+        <line x1="8" y1="16" x2="28" y2="16" stroke="#f0b84a" stroke-width="1"/>
+      </svg>
+      Medieval: Escape The Dungeon
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+      aria-controls="navMenu" aria-expanded="false" aria-label="Navigation öffnen">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto gap-lg-1">
+        <li class="nav-item"><a class="nav-link" href="../index.html#features">Features</a></li>
+        <li class="nav-item"><a class="nav-link" href="../index.html#pricing">Kaufen</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">Über uns</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html" aria-current="page">Kontakt</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════ PAGE HEADER ═══════════════════ -->
+<header class="page-header">
+  <div class="container">
+    <span class="page-eyebrow fade-up delay-1">Wir sind für dich da</span>
+    <h1 class="page-title fade-up delay-2">Kontakt</h1>
+    <p class="page-lead fade-up delay-3">
+      Fragen zum Spiel, technischer Support oder Lizenzanfragen —
+      das Team von EternalChivalry Interactive antwortet werktags binnen 48 Stunden.
+    </p>
+  </div>
+</header>
+
+<main>
+
+<!-- ═══════════════════ KONTAKTINFOS ══════════════════ -->
+<section class="section" aria-labelledby="contact-info-heading">
+  <div class="container">
+    <div class="visually-hidden" id="contact-info-heading">Kontaktinformationen</div>
+
+    <div class="row g-4 mb-5">
+      <div class="col-sm-6 col-lg-3">
+        <div class="info-card">
+          <i class="bi bi-envelope-fill info-card-icon" aria-hidden="true"></i>
+          <p class="info-card-title">Allgemeiner Support</p>
+          <p class="info-card-value">
+            <a href="mailto:support@eternalchivalry-interactive.at">support@<br>eternalchivalry-interactive.at</a>
+          </p>
+          <p class="info-card-sub">Technische Hilfe, Kaufprobleme</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="info-card">
+          <i class="bi bi-briefcase-fill info-card-icon" aria-hidden="true"></i>
+          <p class="info-card-title">Rechtliches &amp; Lizenzen</p>
+          <p class="info-card-value">
+            <a href="mailto:legal@eternalchivalry-interactive.at">legal@<br>eternalchivalry-interactive.at</a>
+          </p>
+          <p class="info-card-sub">EULA, Marken, Kooperationen</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="info-card">
+          <i class="bi bi-camera-video-fill info-card-icon" aria-hidden="true"></i>
+          <p class="info-card-title">Content Creator</p>
+          <p class="info-card-value">
+            <a href="mailto:content@eternalchivalry-interactive.at">content@<br>eternalchivalry-interactive.at</a>
+          </p>
+          <p class="info-card-sub">Streams, Let's Plays, Presse</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="info-card">
+          <i class="bi bi-geo-alt-fill info-card-icon" aria-hidden="true"></i>
+          <p class="info-card-title">Postanschrift</p>
+          <p class="info-card-value">Musterstraße 12<br>1010 Wien, Österreich</p>
+          <p class="info-card-sub">Mo–Fr, 9:00–17:00 Uhr</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact form + FAQ -->
+    <div class="row g-5">
+
+      <!-- Form -->
+      <div class="col-lg-7">
+        <span class="section-label">Nachricht senden</span>
+        <h2 class="section-title">Kontaktformular</h2>
+        <div class="rune-divider" aria-hidden="true">⚔</div>
+
+        <p style="color:var(--text-dim); margin-bottom:1.5rem;">
+          Wähle zunächst dein Anliegen — das hilft uns, deine Nachricht schneller
+          an die richtige Person weiterzuleiten.
+        </p>
+
+        <!-- Topic selector -->
+        <div class="topic-grid" role="group" aria-label="Anliegen auswählen">
+          <button class="topic-btn active" onclick="setTopic(this, 'Technischer Support')" type="button">
+            <i class="bi bi-tools me-1" aria-hidden="true"></i> Support
+          </button>
+          <button class="topic-btn" onclick="setTopic(this, 'Kaufproblem')" type="button">
+            <i class="bi bi-bag me-1" aria-hidden="true"></i> Kaufproblem
+          </button>
+          <button class="topic-btn" onclick="setTopic(this, 'Rückerstattung')" type="button">
+            <i class="bi bi-arrow-counterclockwise me-1" aria-hidden="true"></i> Rückerstattung
+          </button>
+          <button class="topic-btn" onclick="setTopic(this, 'Content Creation')" type="button">
+            <i class="bi bi-camera-video me-1" aria-hidden="true"></i> Content
+          </button>
+          <button class="topic-btn" onclick="setTopic(this, 'Presse / PR')" type="button">
+            <i class="bi bi-newspaper me-1" aria-hidden="true"></i> Presse
+          </button>
+          <button class="topic-btn" onclick="setTopic(this, 'Sonstiges')" type="button">
+            <i class="bi bi-chat-dots me-1" aria-hidden="true"></i> Sonstiges
+          </button>
+        </div>
+
+        <div class="contact-form-wrap">
+          <!-- Success message (hidden until submit) -->
+          <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+            <p><strong style="color:var(--gold-light);">Nachricht gesendet!</strong><br>
+            Wir melden uns werktags binnen 48 Stunden. Danke für deine Nachricht.</p>
+          </div>
+
+          <!-- Form (mocked — no backend) -->
+          <div id="contactFormInner">
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label for="fname" class="form-label">Vorname <span aria-hidden="true" style="color:var(--blood-light)">*</span></label>
+                <input type="text" class="form-control" id="fname" name="fname"
+                  placeholder="Lukas" autocomplete="given-name"
+                  required aria-required="true" />
+              </div>
+              <div class="col-sm-6">
+                <label for="lname" class="form-label">Nachname <span aria-hidden="true" style="color:var(--blood-light)">*</span></label>
+                <input type="text" class="form-control" id="lname" name="lname"
+                  placeholder="Brenner" autocomplete="family-name"
+                  required aria-required="true" />
+              </div>
+              <div class="col-12">
+                <label for="email" class="form-label">E-Mail-Adresse <span aria-hidden="true" style="color:var(--blood-light)">*</span></label>
+                <input type="email" class="form-control" id="email" name="email"
+                  placeholder="deine@email.at" autocomplete="email"
+                  required aria-required="true" />
+              </div>
+              <div class="col-12">
+                <label for="orderid" class="form-label">
+                  Bestellnummer
+                  <span style="color:var(--text-dim); font-weight:400; font-size:0.88rem;">(optional, für Support-Anfragen)</span>
+                </label>
+                <input type="text" class="form-control" id="orderid" name="orderid"
+                  placeholder="ME-2024-XXXXX" />
+              </div>
+              <div class="col-12">
+                <label for="subject" class="form-label">Betreff <span aria-hidden="true" style="color:var(--blood-light)">*</span></label>
+                <input type="text" class="form-control" id="subject" name="subject"
+                  placeholder="Kurze Beschreibung deines Anliegens"
+                  required aria-required="true" />
+              </div>
+              <div class="col-12">
+                <label for="message" class="form-label">Nachricht <span aria-hidden="true" style="color:var(--blood-light)">*</span></label>
+                <textarea class="form-control" id="message" name="message"
+                  rows="6" maxlength="2000"
+                  placeholder="Beschreibe dein Anliegen so detailliert wie möglich..."
+                  required aria-required="true"
+                  oninput="updateCharCount(this)"></textarea>
+                <p class="char-count" id="charCount" aria-live="polite">0 / 2000 Zeichen</p>
+              </div>
+
+              <!-- Hidden topic field -->
+              <input type="hidden" id="topicField" name="topic" value="Technischer Support" />
+
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="privacyCheck"
+                    required aria-required="true" />
+                  <label class="form-check-label" for="privacyCheck">
+                    Ich habe die <a href="privacy.html">Datenschutzerklärung</a> gelesen und bin mit
+                    der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage einverstanden.
+                    <span aria-hidden="true" style="color:var(--blood-light)"> *</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-12 mt-2">
+                <button type="button" class="btn-medieval" onclick="submitForm()" aria-label="Nachricht absenden">
+                  <i class="bi bi-send me-2" aria-hidden="true"></i>Nachricht senden
+                </button>
+                <p style="font-size:0.82rem; color:var(--text-dim); margin-top:0.75rem;">
+                  <span aria-hidden="true" style="color:var(--blood-light)">*</span> Pflichtfeld &nbsp;·&nbsp;
+                  Antwortzeit: werktags binnen 48 Stunden
+                </p>
+              </div>
+            </div>
+          </div><!-- end #contactFormInner -->
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <!-- <div class="col-lg-5">
+        <span class="section-label">Häufige Fragen</span>
+        <h2 class="section-title">FAQ</h2>
+        <div class="rune-divider" aria-hidden="true">⚔</div>
+
+        <div class="faq-list" role="list">
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+              Wie erhalte ich meine Spieledateien nach dem Kauf?
+              <i class="bi bi-plus-lg" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer" role="region">
+              Nach dem Kauf erhältst du sofort eine E-Mail mit deinem persönlichen Download-Link.
+              Der Link ist 30 Tage gültig und kann bis zu 5-mal genutzt werden. Bei Problemen
+              wende dich an unseren Support unter Angabe deiner Bestellnummer.
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+              Auf wie vielen Geräten kann ich das Spiel installieren?
+              <i class="bi bi-plus-lg" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer" role="region">
+              Die Lizenz erlaubt die gleichzeitige Installation auf bis zu 3 eigenen Geräten.
+              Alle gängigen Desktop-Betriebssysteme werden unterstützt: Windows 10/11, macOS 11+
+              und Ubuntu 20.04+.
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+              Wie funktioniert die 14-Tage-Rückgabe?
+              <i class="bi bi-plus-lg" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer" role="region">
+              Gemäß EU-Verbraucherrecht gilt ein Widerrufsrecht von 14 Tagen ab Kaufdatum,
+              sofern der Download noch nicht begonnen hat. Nach Beginn des Downloads erlischt
+              das Recht gemäß § 18 FAGG. Schreib uns an
+              <a href="mailto:support@eternalchivalry-interactive.at">support@eternalchivalry-interactive.at</a>
+              mit deiner Bestellnummer.
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+              Darf ich das Spiel auf YouTube/Twitch streamen?
+              <i class="bi bi-plus-lg" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer" role="region">
+              Für nicht-monetarisierte Streams und Videos: ja, ausdrücklich erlaubt.
+              Für monetarisierte Inhalte (z. B. YouTube-Monetarisierung, Twitch-Subs) ist eine
+              kostenlose schriftliche Genehmigung erforderlich — einfach an
+              <a href="mailto:content@eternalchivalry-interactive.at">content@eternalchivalry-interactive.at</a>
+              schreiben.
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+              Was beinhaltet die Deluxe-Edition zusätzlich?
+              <i class="bi bi-plus-lg" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer" role="region">
+              Die Deluxe-Edition enthält das vollständige Spiel plus: den kompletten
+              Soundtrack als FLAC und MP3 (40+ Minuten), ein digitales Artbook als PDF (80 Seiten)
+              mit Konzeptzeichnungen und Designnotizen, sowie alle zukünftigen DLCs ohne Aufpreis.
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+              Das Spiel startet nicht — was tun?
+              <i class="bi bi-plus-lg" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer" role="region">
+              Stelle sicher, dass dein System die Mindestanforderungen erfüllt und alle
+              Grafik- und Audiotreiber aktuell sind. Starte das Spiel als Administrator.
+              Wenn das Problem bestehen bleibt, schreibe uns mit Betriebssystem, Grafikkarte
+              und einer Beschreibung des Fehlers an
+              <a href="mailto:support@eternalchivalry-interactive.at">support@eternalchivalry-interactive.at</a>.
+            </div>
+          </div>
+
+        </div> end .faq-list -->
+      <!-- </div> -->
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ IMPRESSUM ═════════════════════ -->
+<section class="impressum-section" id="impressum" aria-labelledby="impressum-heading">
+  <div class="container">
+    <span class="section-label">Pflichtangaben gemäß § 24 MedienG &amp; § 5 ECG</span>
+    <h2 class="section-title" id="impressum-heading">Impressum</h2>
+    <div class="rune-divider" aria-hidden="true">⚔</div>
+
+    <div class="row g-4">
+
+      <!-- Unternehmensangaben -->
+      <div class="col-lg-6">
+        <div class="impressum-block">
+          <h3><i class="bi bi-building me-2" aria-hidden="true"></i>Unternehmensangaben</h3>
+          <table class="impressum-table" aria-label="Unternehmensangaben">
+            <tbody>
+              <tr>
+                <td>Unternehmensname</td>
+                <td>EternalChivalry Interactive e.U.</td>
+              </tr>
+              <tr>
+                <td>Rechtsform</td>
+                <td>Einzelunternehmen (e.U.)</td>
+              </tr>
+              <tr>
+                <td>Inhaber</td>
+                <td>Yi Liu</td>
+              </tr>
+              <tr>
+                <td>Adresse</td>
+                <td>Musterstraße 12<br>1010 Wien<br>Österreich</td>
+              </tr>
+              <tr>
+                <td>E-Mail</td>
+                <td><a href="mailto:office@eternalchivalry-interactive.at">office@eternalchivalry-interactive.at</a></td>
+              </tr>
+              <tr>
+                <td>Telefon</td>
+                <td><a href="tel:+4312345678">+43 125 27 208</a></td>
+              </tr>
+              <tr>
+                <td>Website</td>
+                <td><a href="../index.html">medieval-escape.at</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="impressum-block">
+          <h3><i class="bi bi-file-earmark-text me-2" aria-hidden="true"></i>Registrierungsdaten</h3>
+          <table class="impressum-table" aria-label="Registrierungsdaten">
+            <tbody>
+              <tr>
+                <td>Firmenbuchnummer</td>
+                <td>FN 123456a</td>
+              </tr>
+              <tr>
+                <td>Firmenbuchgericht</td>
+                <td>Handelsgericht Wien</td>
+              </tr>
+              <tr>
+                <td>UID-Nummer</td>
+                <td>ATU12345678</td>
+              </tr>
+              <tr>
+                <td>Wirtschaftskammer</td>
+                <td>WKO Wien — Fachgruppe UBIT</td>
+              </tr>
+              <tr>
+                <td>Gewerbe</td>
+                <td>Dienstleistungen in der automatischen Datenverarbeitung und Informationstechnik (§ 5 Abs. 2 GewO)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Medienrechtliche & weitere Angaben -->
+      <div class="col-lg-6">
+        <div class="impressum-block">
+          <h3><i class="bi bi-newspaper me-2" aria-hidden="true"></i>Medienrechtliche Angaben (§ 24 MedienG)</h3>
+          <table class="impressum-table" aria-label="Medienrechtliche Angaben">
+            <tbody>
+              <tr>
+                <td>Medieninhaber</td>
+                <td>EternalChivalry Interactive e.U., Yi Liu, Musterstraße 12, 1010 Wien</td>
+              </tr>
+              <tr>
+                <td>Unternehmensgegenstand</td>
+                <td>Entwicklung und Vertrieb von Computerspielen und digitalen Softwareprodukten</td>
+              </tr>
+              <tr>
+                <td>Grundlegende Richtung</td>
+                <td>Informations- und Verkaufswebsite für das Computerspiel Medieval: Escape The Dungeon</td>
+              </tr>
+              <tr>
+                <td>Blattlinie</td>
+                <td>Produktpräsentation, Vertrieb und Support für Medieval: Escape The Dungeon</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="impressum-block">
+          <h3><i class="bi bi-shield-check me-2" aria-hidden="true"></i>Aufsichtsbehörde &amp; Berufsrecht</h3>
+          <table class="impressum-table" aria-label="Aufsichtsbehörde">
+            <tbody>
+              <tr>
+                <td>Aufsichtsbehörde</td>
+                <td>Magistratisches Bezirksamt Wien</td>
+              </tr>
+              <tr>
+                <td>Anwendbares Recht</td>
+                <td>Gewerbeordnung (GewO 1994), Österreich</td>
+              </tr>
+              <tr>
+                <td>Verbraucher­schlichtung</td>
+                <td>
+                  <a href="https://www.internetombudsmann.at" target="_blank" rel="noopener noreferrer">
+                    Internetombudsmann.at <i class="bi bi-box-arrow-up-right" style="font-size:0.75em" aria-label="Öffnet in neuem Tab"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>EU-Streitbeilegung</td>
+                <td>
+                  <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer">
+                    ec.europa.eu/consumers/odr <i class="bi bi-box-arrow-up-right" style="font-size:0.75em" aria-label="Öffnet in neuem Tab"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="impressum-block">
+          <h3><i class="bi bi-person-check me-2" aria-hidden="true"></i>Verantwortlich für den Inhalt</h3>
+          <table class="impressum-table" aria-label="Verantwortlich für den Inhalt">
+            <tbody>
+              <tr>
+                <td>Verantwortliche Person</td>
+                <td>Yi Liu</td>
+              </tr>
+              <tr>
+                <td>Funktion</td>
+                <td>Inhaber &amp; Geschäftsführer</td>
+              </tr>
+              <tr>
+                <td>Kontakt</td>
+                <td><a href="mailto:office@eternalchivalry-interactive.at">office@eternalchivalry-interactive.at</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div><!-- end .row -->
+
+    <!-- Legal notices -->
+    <div class="legal-notice" role="note" aria-label="Rechtliche Hinweise">
+      <p>
+        <strong style="color:var(--text);">Haftungsausschluss für externe Links:</strong>
+        Diese Website enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen
+        Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter
+        verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche
+        Rechtsverstöße überprüft — eine permanente inhaltliche Kontrolle ist ohne konkreten
+        Anhaltspunkt nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden derartige
+        Links umgehend entfernt.
+      </p>
+      <p>
+        <strong style="color:var(--text);">Urheberrecht:</strong>
+        Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen
+        dem österreichischen Urheberrecht (UrhG). Die Vervielfältigung, Bearbeitung, Verbreitung
+        und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der
+        schriftlichen Zustimmung des jeweiligen Autors oder Erstellers.
+      </p>
+      <p>
+        <strong style="color:var(--text);">Datenschutz:</strong>
+        Informationen zur Verarbeitung personenbezogener Daten findest du in unserer
+        <a href="privacy.html">Datenschutzerklärung</a>.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<!-- ═══════════════════ FOOTER ════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <p class="footer-brand">⚔ Medieval: Escape The Dungeon</p>
+        <p style="font-size:0.88rem; color:var(--text-dim); font-style:italic; margin-top:0.25rem;">
+          Into the dark age — Out of the dungeon
+        </p>
+        <p style="font-size:0.85rem; color:var(--text-dim); margin-top:0.75rem;">
+          © 2024 EternalChivalry Interactive e.U.<br>Alle Rechte vorbehalten.
+        </p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <p class="footer-heading">Navigation</p>
+        <ul class="footer-links">
+          <li><a href="../index.html">Startseite</a></li>
+          <li><a href="../index.html#features">Features</a></li>
+          <li><a href="../index.html#pricing">Kaufen</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <p class="footer-heading">Unternehmen</p>
+        <ul class="footer-links">
+          <li><a href="about.html">Über uns</a></li>
+          <li><a href="contact.html">Kontakt</a></li>
+          <li><a href="contact.html#impressum">Impressum</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <p class="footer-heading">Rechtliches</p>
+        <ul class="footer-links">
+          <li><a href="license.html">Lizenz</a></li>
+          <li><a href="privacy.html">Datenschutz</a></li>
+          <li><a href="accessibility.html">Barrierefreiheit</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom d-flex flex-wrap justify-content-between gap-2">
+      <span>© 2024 EternalChivalry Interactive e.U. · Wien, Österreich</span>
+      <span>
+        <a href="privacy.html">Datenschutz</a> ·
+        <a href="license.html">Lizenz</a> ·
+        <a href="accessibility.html">Barrierefreiheit</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  /* ── Topic selector ──────────────────────────────────── */
+  function setTopic(btn, topic) {
+    document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('topicField').value = topic;
+    document.getElementById('subject').placeholder =
+      topic === 'Technischer Support' ? 'z. B. Spiel startet nicht unter Windows 11' :
+      topic === 'Kaufproblem'          ? 'z. B. Download-Link nicht angekommen' :
+      topic === 'Rückerstattung'       ? 'z. B. Rückerstattungsantrag Bestellung ME-2024-...' :
+      topic === 'Content Creation'     ? 'z. B. Monetarisierungsgenehmigung für YouTube' :
+      topic === 'Presse / PR'          ? 'z. B. Presseanfrage / Review-Key' :
+      'Kurze Beschreibung deines Anliegens';
+  }
+
+  /* ── Character counter ───────────────────────────────── */
+  function updateCharCount(el) {
+    document.getElementById('charCount').textContent =
+      el.value.length + ' / 2000 Zeichen';
+  }
+
+  /* ── Mock form submit ────────────────────────────────── */
+  function submitForm() {
+    const fname   = document.getElementById('fname').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const privacy = document.getElementById('privacyCheck').checked;
+
+    if (!fname || !email || !subject || !message) {
+      alert('Bitte fülle alle Pflichtfelder aus.');
+      return;
+    }
+    if (!privacy) {
+      alert('Bitte stimme der Datenschutzerklärung zu.');
+      return;
+    }
+
+    // Mock: hide form, show success
+    document.getElementById('contactFormInner').style.display = 'none';
+    const success = document.getElementById('formSuccess');
+    success.classList.add('visible');
+    success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  /* ── FAQ accordion ───────────────────────────────────── */
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+    // Close all others
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.setAttribute('aria-expanded', 'false');
+      q.nextElementSibling.classList.remove('open');
+    });
+
+    if (!isOpen) {
+      btn.setAttribute('aria-expanded', 'true');
+      answer.classList.add('open');
+    }
+  }
+</script>
+</body>
+</html>

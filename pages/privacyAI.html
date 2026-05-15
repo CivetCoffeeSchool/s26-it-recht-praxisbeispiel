@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Datenschutzerklärung – Medieval: Escape The Dungeon</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --black:       #0a0805;
+      --deep:        #110e09;
+      --surface:     #1c1710;
+      --surface2:    #252015;
+      --border:      #4a3e28;
+      --gold:        #f0b84a;
+      --gold-light:  #ffd27a;
+      --gold-dim:    #a07830;
+      --blood:       #c0392b;
+      --blood-light: #e05545;
+      --text:        #e8dcc0;
+      --text-dim:    #a89878;
+      --white:       #f8f0e0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--text);
+      font-family: 'Crimson Text', Georgia, serif;
+      font-size: 1.1rem;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; opacity: 0.5;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Uncial Antiqua', serif;
+      color: var(--gold-light);
+      letter-spacing: 0.04em;
+    }
+
+    a { color: var(--gold); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--gold-light); text-decoration: underline; }
+
+    /* ── Navbar ─────────────────────────────────────────────── */
+    .navbar {
+      background: linear-gradient(180deg, rgba(10,8,5,0.98), rgba(10,8,5,0.85));
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      position: sticky; top: 0; z-index: 1000;
+    }
+    .navbar-brand {
+      font-family: 'Uncial Antiqua', serif;
+      font-size: 1.4rem;
+      color: var(--gold-light) !important;
+      letter-spacing: 0.06em;
+    }
+    .navbar-nav .nav-link {
+      color: var(--text-dim) !important;
+      font-size: 0.95rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .navbar-nav .nav-link:hover { color: var(--gold-light) !important; }
+    .navbar-toggler { border-color: var(--border); }
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28240,184,74,0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    /* ── Page header ─────────────────────────────────────────── */
+    .page-header {
+      position: relative;
+      padding: 5rem 0 4rem;
+      text-align: center;
+      background: linear-gradient(180deg, var(--black) 0%, var(--deep) 100%);
+    }
+    .page-header::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold-dim), var(--gold), var(--gold-dim), transparent);
+    }
+    .page-header::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .page-eyebrow {
+      font-size: 0.8rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--blood-light);
+      display: block; margin-bottom: 0.75rem;
+    }
+    .page-title {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      margin-bottom: 1rem;
+      text-shadow: 0 0 40px rgba(240,184,74,0.3);
+    }
+    .page-lead {
+      color: var(--text-dim); font-style: italic;
+      font-size: 1.1rem; max-width: 620px; margin: 0 auto;
+    }
+
+    /* ── Two-column layout ───────────────────────────────────── */
+    .privacy-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+    }
+    @media (max-width: 991px) {
+      .privacy-layout { grid-template-columns: 1fr; }
+      .privacy-sidebar { display: none; }
+    }
+
+    /* ── Sidebar ─────────────────────────────────────────────── */
+    .privacy-sidebar {
+      background: var(--deep);
+      border-right: 1px solid var(--border);
+      padding: 2.5rem 1.5rem;
+      position: sticky;
+      top: 57px;
+      height: calc(100vh - 57px);
+      overflow-y: auto;
+    }
+    .toc-heading {
+      font-family: 'Crimson Text', serif;
+      font-size: 0.72rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold-dim);
+      margin-bottom: 1rem;
+    }
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-list li { margin-bottom: 0.05rem; }
+    .toc-list a {
+      display: block; color: var(--text-dim);
+      font-size: 0.88rem; padding: 0.3rem 0.6rem;
+      border-left: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .toc-list a:hover {
+      color: var(--gold); border-left-color: var(--gold-dim);
+      text-decoration: none; background: rgba(240,184,74,0.04);
+    }
+    .toc-list a.active { color: var(--gold-light); border-left-color: var(--gold); }
+
+    /* ── Main content ────────────────────────────────────────── */
+    .privacy-content {
+      padding: 3rem 2.5rem 5rem;
+      max-width: 840px;
+    }
+    @media (max-width: 767px) { .privacy-content { padding: 2rem 1rem 4rem; } }
+
+    /* ── Sections ────────────────────────────────────────────── */
+    .prv-section {
+      margin-bottom: 3.5rem;
+      scroll-margin-top: 80px;
+    }
+    .prv-label {
+      font-size: 0.72rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--blood-light);
+      display: block; margin-bottom: 0.3rem;
+    }
+    .prv-section h2 {
+      font-size: clamp(1.35rem, 2.8vw, 1.9rem);
+      margin-bottom: 0.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .prv-section h3 {
+      font-size: 1.1rem; color: var(--gold);
+      margin-top: 1.75rem; margin-bottom: 0.5rem;
+    }
+
+    .rune-divider {
+      display: flex; align-items: center; gap: 1rem;
+      margin: 0.6rem 0 1.5rem; color: var(--gold-dim);
+    }
+    .rune-divider::before, .rune-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
+    /* ── Callouts ────────────────────────────────────────────── */
+    .callout {
+      padding: 1.25rem 1.5rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      margin: 1.5rem 0;
+    }
+    .callout.info    { border-left: 3px solid var(--gold-dim); }
+    .callout.warning { border-left: 3px solid var(--blood-light); }
+    .callout.success { border-left: 3px solid #4a9a4a; }
+    .callout-title {
+      font-family: 'Uncial Antiqua', serif;
+      font-size: 0.9rem; margin-bottom: 0.5rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .callout.info    .callout-title { color: var(--gold); }
+    .callout.warning .callout-title { color: var(--blood-light); }
+    .callout.success .callout-title { color: #7acc7a; }
+    .callout p { color: var(--text-dim); font-size: 0.97rem; margin: 0; }
+    .callout p + p { margin-top: 0.5rem; }
+
+    /* ── Data processing table ───────────────────────────────── */
+    .data-table {
+      width: 100%; border-collapse: collapse; margin: 1.25rem 0;
+      font-size: 0.93rem;
+    }
+    .data-table th {
+      background: var(--surface2);
+      color: var(--gold);
+      font-family: 'Uncial Antiqua', serif;
+      font-size: 0.85rem;
+      padding: 0.65rem 0.9rem;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+    }
+    .data-table td {
+      padding: 0.6rem 0.9rem;
+      border-bottom: 1px solid rgba(74,62,40,0.4);
+      color: var(--text-dim);
+      vertical-align: top;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: rgba(255,255,255,0.015); }
+    .data-table td:first-child { color: var(--text); font-weight: 600; }
+
+    .legal-basis {
+      display: inline-block;
+      font-size: 0.72rem; padding: 0.15rem 0.5rem;
+      border: 1px solid var(--border);
+      color: var(--gold); background: var(--surface2);
+      white-space: nowrap;
+    }
+
+    /* ── Rights grid ─────────────────────────────────────────── */
+    .rights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .right-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.25rem;
+      transition: border-color 0.3s;
+    }
+    .right-card:hover { border-color: var(--gold-dim); }
+    .right-card i {
+      font-size: 1.4rem; color: var(--gold);
+      display: block; margin-bottom: 0.5rem;
+    }
+    .right-card h4 {
+      font-size: 0.95rem; color: var(--gold-light);
+      margin-bottom: 0.4rem;
+    }
+    .right-card p {
+      font-size: 0.88rem; color: var(--text-dim); margin: 0;
+    }
+
+    /* ── Cookie table ────────────────────────────────────────── */
+    .cookie-category {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      margin-bottom: 1rem;
+    }
+    .cookie-cat-header {
+      padding: 1rem 1.25rem;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+    .cookie-cat-title {
+      font-family: 'Uncial Antiqua', serif;
+      font-size: 1rem; color: var(--gold-light);
+      margin: 0;
+    }
+    .cookie-badge {
+      font-size: 0.72rem; padding: 0.2rem 0.6rem;
+      border: 1px solid; white-space: nowrap;
+    }
+    .cookie-badge.required { border-color: #4a9a4a; color: #7acc7a; }
+    .cookie-badge.optional { border-color: var(--gold-dim); color: var(--gold); }
+    .cookie-badge.analytics { border-color: var(--border); color: var(--text-dim); }
+
+    .cookie-details { padding: 1rem 1.25rem; }
+    .cookie-details p { font-size: 0.93rem; color: var(--text-dim); margin-bottom: 0.75rem; }
+
+    .cookie-list { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .cookie-list th {
+      color: var(--text-dim); font-family: 'Crimson Text', serif;
+      font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.4rem 0.75rem; text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .cookie-list td {
+      padding: 0.45rem 0.75rem;
+      border-bottom: 1px solid rgba(74,62,40,0.3);
+      color: var(--text-dim); vertical-align: top;
+    }
+    .cookie-list td:first-child { color: var(--text); font-family: monospace; font-size: 0.85rem; }
+    .cookie-list tr:last-child td { border-bottom: none; }
+
+    /* ── Version stamp ───────────────────────────────────────── */
+    .version-stamp {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--surface2); border: 1px solid var(--border);
+      padding: 0.4rem 1rem; font-size: 0.82rem; color: var(--text-dim);
+      margin-bottom: 2rem;
+    }
+    .version-stamp strong { color: var(--gold); }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0 1.5rem;
+    }
+    .footer-brand { font-family: 'Uncial Antiqua', serif; font-size: 1.2rem; color: var(--gold-light); }
+    .footer-links { list-style: none; padding: 0; margin: 0; }
+    .footer-links li { margin-bottom: 0.35rem; }
+    .footer-links a { color: var(--text-dim); font-size: 0.9rem; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-heading { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.75rem; }
+    .footer-bottom { border-top: 1px solid var(--border); margin-top: 2rem; padding-top: 1rem; font-size: 0.82rem; color: var(--text-dim); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.6s ease forwards; }
+    .delay-1 { animation-delay: 0.1s; opacity: 0; }
+    .delay-2 { animation-delay: 0.25s; opacity: 0; }
+    .delay-3 { animation-delay: 0.4s; opacity: 0; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════ NAVBAR ═══════════════════════ -->
+<nav class="navbar navbar-expand-lg" aria-label="Hauptnavigation">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">
+      <svg width="26" height="26" viewBox="0 0 36 36" fill="none" aria-hidden="true" style="margin-right:0.4rem">
+        <path d="M18 2 L34 8 L34 20 Q34 30 18 34 Q2 30 2 20 L2 8 Z" fill="none" stroke="#f0b84a" stroke-width="1.5"/>
+        <line x1="18" y1="8" x2="18" y2="29" stroke="#f0b84a" stroke-width="1"/>
+        <line x1="8" y1="16" x2="28" y2="16" stroke="#f0b84a" stroke-width="1"/>
+      </svg>
+      Medieval: Escape The Dungeon
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+      aria-controls="navMenu" aria-expanded="false" aria-label="Navigation öffnen">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto gap-lg-1">
+        <li class="nav-item"><a class="nav-link" href="../index.html#features">Features</a></li>
+        <li class="nav-item"><a class="nav-link" href="../index.html#pricing">Kaufen</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">Über uns</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Kontakt</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════ PAGE HEADER ═══════════════════ -->
+<header class="page-header">
+  <div class="container">
+    <span class="page-eyebrow fade-up delay-1">DSGVO-konform · Stand Januar 2024</span>
+    <h1 class="page-title fade-up delay-2">Datenschutzerklärung</h1>
+    <p class="page-lead fade-up delay-3">
+      Wir nehmen den Schutz deiner persönlichen Daten ernst. Diese Erklärung informiert dich
+      darüber, welche Daten wir erheben, wie wir sie verwenden und welche Rechte du hast.
+    </p>
+  </div>
+</header>
+
+<!-- ═══════════════════ MAIN LAYOUT ══════════════════ -->
+<div class="privacy-layout">
+
+  <!-- Sidebar TOC -->
+  <aside class="privacy-sidebar" aria-label="Inhaltsverzeichnis">
+    <p class="toc-heading">Inhaltsverzeichnis</p>
+    <ul class="toc-list" role="list">
+      <li><a href="#verantwortlicher">§ 1 Verantwortlicher</a></li>
+      <li><a href="#grundsaetze">§ 2 Grundsätze</a></li>
+      <li><a href="#erhobene-daten">§ 3 Erhobene Daten</a></li>
+      <li><a href="#cookies">§ 4 Cookies</a></li>
+      <li><a href="#kontaktformular">§ 5 Kontaktformular</a></li>
+      <li><a href="#kauf">§ 6 Kaufabwicklung</a></li>
+      <li><a href="#analyse">§ 7 Analyse-Tools</a></li>
+      <li><a href="#drittanbieter">§ 8 Drittanbieter</a></li>
+      <li><a href="#speicherdauer">§ 9 Speicherdauer</a></li>
+      <li><a href="#rechte">§ 10 Deine Rechte</a></li>
+      <li><a href="#sicherheit">§ 11 Datensicherheit</a></li>
+      <li><a href="#aenderungen">§ 12 Änderungen</a></li>
+      <li><a href="#kontakt-ds">§ 13 Kontakt DSB</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main content -->
+  <main class="privacy-content" id="main-content">
+
+    <div class="version-stamp" aria-label="Dokumentversion">
+      <i class="bi bi-file-earmark-lock" aria-hidden="true"></i>
+      <span>Version <strong>1.0</strong> &nbsp;·&nbsp; Zuletzt aktualisiert: <strong>Januar 2024</strong> &nbsp;·&nbsp; Gilt ab: <strong>01.01.2024</strong></span>
+    </div>
+
+    <div class="callout info" role="note">
+      <p class="callout-title"><i class="bi bi-info-circle" aria-hidden="true"></i> Kurzfassung</p>
+      <p>Wir verkaufen keine persönlichen Daten. Wir nutzen keine aggressiven Tracking-Tools.
+      Wir speichern nur was wir brauchen, so lange wie nötig. Diese Seite erklärt alles im Detail.</p>
+    </div>
+
+    <!-- § 1 Verantwortlicher -->
+    <section class="prv-section" id="verantwortlicher" aria-labelledby="h-verantwortlicher">
+      <span class="prv-label">§ 1</span>
+      <h2 id="h-verantwortlicher">Verantwortlicher</h2>
+      <div class="rune-divider" aria-hidden="true">⚔</div>
+      <p>
+        Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) und des
+        österreichischen Datenschutzgesetzes (DSG) ist:
+      </p>
+      <div style="background:var(--surface); border:1px solid var(--border); padding:1.25rem 1.5rem; margin:1rem 0;">
+        <p style="margin:0; line-height:2.1; color:var(--text);">
+          <strong style="color:var(--gold-light);">EternalChivalry Interactive e.U.</strong><br>
+          Inhaber: Yi Liu<br>
+          Musterstraße 12, 1010 Wien, Österreich<br>
+          E-Mail: <a href="mailto:datenschutz@eternalchivalry-interactive.at">datenschutz@eternalchivalry-interactive.at</a><br>
+          Tel.: <a href="tel:+4312345678">+43 125 27 208</a>
+        </p>
+      </div>
+      <p>
+        Bei Fragen zur Verarbeitung deiner personenbezogenen Daten wende dich jederzeit
+        an die oben genannte Adresse. Da wir weniger als 250 Mitarbeiter beschäftigen und
+        keine umfangreiche Verarbeitung besonderer Datenkategorien durchführen, ist die
+        Benennung eines Datenschutzbeauftragten gemäß Art. 37 DSGVO für uns nicht verpflichtend.
+      </p>
+    </section>
+
+    <!-- § 2 Grundsätze -->
+    <section class="prv-section" id="grundsaetze" aria-labelledby="h-grundsaetze">
+      <span class="prv-label">§ 2</span>
+      <h2 id="h-grundsaetze">Grundsätze der Datenverarbeitung</h2>
+      <div class="rune-divider" aria-hidden="true">⚔</div>
+      <p>
+        Wir verarbeiten personenbezogene Daten ausschließlich im Einklang mit der
+        DSGVO, dem österreichischen DSG und dem Telekommunikationsgesetz (TKG 2021).
+        Dabei gelten folgende Grundsätze:
+      </p>
+      <ul style="color:var(--text-dim); padding-left:1.4rem;">
+        <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Rechtmäßigkeit:</strong> Wir verarbeiten Daten nur auf Basis einer gültigen Rechtsgrundlage (Art. 6 DSGVO).</li>
+        <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Zweckbindung:</strong> Daten werden nur für festgelegte, eindeutige und legitime Zwecke erhoben.</li>
+        <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Datensparsamkeit:</strong> Wir erheben nur die Daten, die für den jeweiligen Zweck unbedingt notwendig sind.</li>
+        <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Richtigkeit:</strong> Wir treffen angemessene Maßnahmen, um unrichtige Daten zu berichtigen oder zu löschen.</li>
+        <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Speicherbegrenzung:</strong> Daten werden gelöscht, sobald sie für ihren Zweck nicht mehr benötigt werden.</li>
+        <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Integrität &amp; Vertraulichkeit:</strong> Wir schützen Daten durch geeignete technische und organisatorische Maßnahmen.</li>
+      </ul>
+    </section>
+
+    <!-- § 3 Erhobene Daten -->
+    <section class="prv-section" id="erhobene-daten" aria-labelledby="h-erhobene-daten">
+      <span class="prv-label">§ 3</span>
+      <h2 id="h-erhobene-daten">Erhobene Daten &amp; Verarbeitungszwecke</h2>
+      <div class="rune-divider" aria-hidden="true">⚔</div>
+      <p>Die folgende Tabelle gibt einen Überblick über alle Kategorien personenbezogener Daten,
+      die wir im Rahmen des Betriebs dieser Website und des Webshops verarbeiten:</p>
+
+      <div style="overflow-x:auto;">
+        <table class="data-table" aria-label="Übersicht Datenverarbeitung">
+          <thead>
+            <tr>
+              <th scope="col">Datenkategorie</th>
+              <th scope="col">Konkrete Daten</th>
+              <th scope="col">Zweck</th>
+              <th scope="col">Rechtsgrundlage</th>
+              <th scope="col">Speicherdauer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Server-Logfiles</td>
+              <td>IP-Adresse (anonymisiert), Datum/Uhrzeit, aufgerufene URL, Browser, Betriebssystem, Referrer</td>
+              <td>Sicherheit, Fehleranalyse, Missbrauchsabwehr</td>
+              <td><span class="legal-basis">Art. 6 Abs. 1 lit. f DSGVO</span></td>
+              <td>7 Tage</td>
+            </tr>
+            <tr>
+              <td>Kontaktformular</td>
+              <td>Vor-/Nachname, E-Mail-Adresse, Bestellnummer (opt.), Betreff, Nachrichteninhalt, Zeitstempel</td>
+              <td>Bearbeitung von Supportanfragen</td>
+              <td><span class="legal-basis">Art. 6 Abs. 1 lit. b DSGVO</span></td>
+              <td>3 Jahre nach Abschluss</td>
+            </tr>
+            <tr>
+              <td>Kaufabwicklung</td>
+              <td>Name, E-Mail, Rechnungsadresse, Zahlungsart (kein Vollzahlungsnachweis), Bestelldaten, Lizenzdaten</td>
+              <td>Vertragserfüllung, Rechnungslegung, Steuerpflicht</td>
+              <td><span class="legal-basis">Art. 6 Abs. 1 lit. b + c DSGVO</span></td>
+              <td>7 Jahre (UGB/BAO)</td>
+            </tr>
+            <tr>
+              <td>Download-Logs</td>
+              <td>IP-Adresse (anonymisiert), Zeitstempel, Download-Token</td>
+              <td>Missbrauchsprävention, Lizenzkontrolle</td>
+              <td><span class="legal-basis">Art. 6 Abs. 1 lit. f DSGVO</span></td>
+              <td>30 Tage</td>
+            </tr>
+            <tr>
+              <td>Cookies (notwendig)</td>
+              <td>Session-ID, Cookie-Einwilligung</td>
+              <td>Technischer Betrieb der Website</td>
+              <td><span class="legal-basis">Art. 6 Abs. 1 lit. f DSGVO</span></td>
+              <td>Session / 1 Jahr</td>
+            </tr>
+            <tr>
+              <td>Cookies (Analyse)</td>
+              <td>Anonyme Nutzungs-ID, besuchte Seiten, Verweildauer</td>
+              <td>Website-Verbesserung (nur mit Einwilligung)</td>
+              <td><span class="legal-basis">Art. 6 Abs. 1 lit. a DSGVO</span></td>
+              <td>13 Monate</td>
+            </tr>
+            <tr>
+              <td>Newsletter (opt.)</td>
+              <td>E-Mail-Adresse, Opt-in-Zeitstempel, Bestätigungs-IP</td>
+              <td>Versand von Produktneuigkeiten (Double-Opt-in)</td>
+              <td><span class="legal-basis">Art. 6 Abs. 1 lit. a DSGVO</span></td>
+              <td>Bis Widerruf + 3 Jahre Nachweis</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- § 4 Cookies -->
+    <section class="prv-section" id="cookies" aria-labelledby="h-cookies">
+      <span class="prv-label">§ 4</span>
+      <h2 id="h-cookies">Cookies &amp; Tracking</h2>
+      <div class="rune-divider" aria-hidden="true">⚔</div>
+      <p>
+        Unsere Website verwendet Cookies — kleine Textdateien, die in deinem Browser
+        gespeichert werden. Gemäß § 165 TKG 2021 und Art. 5 Abs. 3 der ePrivacy-Richtlinie
+        setzen wir nicht-notwendige Cookies nur nach deiner ausdrücklichen Einwilligung ein.
+      </p>
+
+      <!-- Notwendige Cookies -->
+      <div class="cookie-category">
+        <div class="cookie-cat-header">
+          <h3 class="cookie-cat-title">Notwendige Cookies</h3>
+          <span class="cookie-badge required">Immer aktiv</span>
+        </div>
+        <div class="cookie-details">
+          <p>Diese Cookies sind für den technischen Betrieb der Website unbedingt erforderlich
+          und können nicht deaktiviert werden. Sie speichern keine personenbezogenen Daten.</p>
+          <table class="cookie-list" aria-label="Notwendige Cookies">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Zweck</th>
+                <th scope="col">Laufzeit</th>
+                <th scope="col">Typ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>me_session</td>
+                <td>Sitzungsverwaltung, Warenkorb</td>
+                <td>Session</td>
+                <td>HTTP</td>
+              </tr>
+              <tr>
+                <td>me_cookie_consent</td>
+                <td>Speichert deine Cookie-Einwilligungsentscheidung</td>
+                <td>1 Jahr</td>
+                <td>HTTP</td>
+              </tr>
+              <tr>
+                <td>me_csrf</td>
+                <td>Schutz vor Cross-Site-Request-Forgery</td>
+                <td>Session</td>
+                <td>HTTP</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Analyse-Cookies -->
+      <div class="cookie-category">
+        <div class="cookie-cat-header">
+          <h3 class="cookie-cat-title">Analyse-Cookies</h3>
+          <span class="cookie-badge analytics">Nur mit Einwilligung</span>
+        </div>
+        <div class="cookie-details">
+          <p>
+            Wir setzen ein datenschutzfreundliches, selbst gehostetes Analyse-Tool ein
+            (Matomo, EU-Server, keine Weitergabe an Dritte). IP-Adressen werden vor
+            der Speicherung anonymisiert. Diese Cookies sind nur nach deiner Zustimmung aktiv.
+          </p>
+          <table class="cookie-list" aria-label="Analyse-Cookies">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Zweck</th>
+                <th scope="col">Laufzeit</th>
+                <th scope="col">Typ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>_pk_id.*</td>
+                <td>Matomo: Nutzer-ID (anonymisiert) zur Wiedererkennung</td>
+                <td>13 Monate</td>
+                <td>HTTP</td>
+              </tr>
+              <tr>
+                <td>_pk_ses.*</td>
+                <td>Matomo: Aktuelle Sitzung</td>
+                <td>30 Minuten</td>
+                <td>HTTP</td>
+              </tr>
+              <tr>
+                <td>_pk_ref.*</td>
+                <td>Matomo: Herkunftsquelle des Besuchers</td>
+                <td>6 Monate</td>
+                <td>HTTP</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="margin-top:0.75rem;">
+            Du kannst der Analyse-Nutzung jederzeit widersprechen:
+            <button onclick="showOptOut()" style="background:none; border:none; color:var(--gold); cursor:pointer; font-family:'Crimson Text',serif; font-size:1rem; text-decoration:underline; padding:0;">
+              Matomo-Tracking jetzt deaktivieren
+            </button>
+          </p>
+          <div id="optOutMsg" style="display:none; margin-top:0.5rem; padding:0.75rem 1rem; background:var(--surface2); border:1px solid var(--border); font-size:0.9rem; color:var(--text-dim);">
+            <i class="bi bi-check-circle me-2" style="color:#7acc7a" aria-hidden="true"></i>
+            Tracking wurde für diese Sitzung deaktiviert (Opt-out-Cookie gesetzt).
+          </div>
+        </div>
+      </div>
+
+      <!-- Keine Marketing-Cookies -->
+      <div class="callout success" role="note">
+        <p class="callout-title"><i class="bi bi-check-circle" aria-hidden="true"></i> Keine Marketing-Cookies</p>
+        <p>Wir verwenden keinerlei Werbe-Cookies, Social-Media-Tracking-Pixel oder
+        Cross-Site-Tracking-Technologien. Du wirst auf keiner anderen Website auf Basis
+        deines Besuchs hier mit Werbung verfolgt.</p>
+      </div>
+    </section>
+
+    <!-- § 5 Kontaktformular -->
+    <section class="prv-section" id="kontaktformular" aria-labelledby="h-kontaktformular">
+      <span class="prv-label">§ 5</span>
+      <h2 id="h-kontaktformular">Kontaktformular</h2>
+      <div class="rune-divider" aria-hidden="true">⚔</div>
+      <p>
+        Wenn du unser Kontaktformular verwendest, werden die angegebenen Daten
+        (Name, E-Mail, Betreff, Nachricht) sowie der Zeitstempel der Absendung
+        zum Zweck der Bearbeitung deiner Anfrage gespeichert.
+      </p>
+      <p>
+        <strong style="color:var(--text);">Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO
+        (Vertragserfüllung bzw. vorvertragliche Maßnahmen) — bei allgemeinen Anfragen
+        Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Kommunikation).
+      </p>
+      <p>
+        Deine Daten werden nach abschließender Bearbeitung deiner Anfrage gesperrt.
+        Nach Ablauf der gesetzlichen Aufbewahrungsfristen (spätestens 3 Jahre)
+        werden sie gelöscht. Eine Weitergabe an Dritte findet nicht statt, außer
+        es ist zur Bearbeitung deiner Anfrage zwingend erforderlich.
+      </p>
+      <p>
+        Du kannst der Verarbeitung deiner im Rahmen des Kontaktformulars übermittelten
+        Daten jederzeit widersprechen, sofern keine gesetzliche Aufbewahrungspflicht besteht.
+        Schreib dazu an:
+        <a href="mailto:datenschutz@eternalchivalry-interactive.at">datenschutz@eternalchivalry-interactive.at</a>
+      </p>
+    </section>
+
+    <!-- § 6 Kaufabwicklung -->
+    <section class="prv-section" id="kauf" aria-labelledby="h-kauf">
+      <span class="prv-label">§ 6</span>
+      <h2 id="h-kauf">Kaufabwicklung &amp; Zahlungsdaten</h2>
+      <div class="rune-divider" aria-hidden="true">⚔</div>
+      <p>
+        Zur Abwicklung von Käufen verarbeiten wir die für die Vertragserfüllung
+        notwendigen Daten: Name, E-Mail-Adresse, Rechnungsadresse und Bestellinformationen.
+      </p>
+
+      <h3>Zahlungsabwicklung</h3>
+      <p>
+        Zahlungen werden über zertifizierte externe Zahlungsdienstleister abgewickelt.
+        Vollständige Zahlungsdaten (Kreditkartennummern etc.) werden ausschließlich
+        beim Zahlungsanbieter gespeichert — EternalChivalry Interactive erhält nur eine
+        Bestätigung über den Transaktionsstatus sowie eine anonymisierte Referenznummer.
+      </p>
+      <p>
+        Eingesetzte Zahlungsanbieter (gemockt — Beispiele):
+      </p>
+      <ul style="color:var(--text-dim); padding-left:1.4rem;">
+        <li style="margin-bottom:0.4rem;"><strong style="color:var(--text);">Stripe Payments Europe, Ltd.</strong> — Dublin, Irland.
+          Datenschutz: <a href="https://stripe.com/de/privacy" target="_blank" rel="noopener noreferrer">stripe.com/de/privacy</a></li>
+        <li style="margin-bottom:0.4rem;"><strong style="color:var(--text);">PayPal (Europe) S.à r.l. et Cie, S.C.A.</strong> — Luxemburg.
+          Datenschutz: <a href="https://www.paypal.com/de/webapps/mpp/ua/privacy-full" target="_blank" rel="noopener noreferrer">paypal.com/privacy</a></li>
+      </ul>
+
+      <h3>Aufbewahrung von Rechnungsdaten</h3>
+      <p>
+        Rechnungs- und Bestelldaten unterliegen der gesetzlichen Aufbewahrungspflicht
+        von <strong style="color:var(--text);">7 Jahren</strong> gemäß §§ 132 ff. BAO
+        (Bundesabgabenordnung) und § 212 UGB (Unternehmensgesetzbuch).
+        Eine Löschung vor Ablauf dieser Frist ist gesetzlich nicht möglich.
+      </p>
+    </section>
+
+    <!-- § 7 Analyse-Tools -->
+    <section class="prv-section" id="analyse" aria-labelledby="h-analyse">
+      <span class="prv-label">§ 7</span>
+      <h2 id="h-analyse">Analyse-Tools</h2>
+      <div class="rune-divider" aria-hidden="true">⚔</div>
+
+      <h3>Matomo (selbst gehostet)</h3>
+      <p>
+        Wir setzen <strong style="color:var(--text);">Matomo</strong> als datenschutzfreundliche
+        Webanalyse-Lösung ein. Matomo ist auf unserem eigenen Server in der EU installiert —
+        es findet keine Übertragung von Daten an externe Server oder Drittanbieter statt.
+      </p>
+      <p>
+        Folgende Maßnahmen zum Datenschutz sind bei Matomo aktiv:
+      </p>
+      <ul style="color:var(--text-dim); padding-left:1.4rem;">
+        <li style="margin-bottom:0.4rem;">IP-Anonymisierung: Die letzten 2 Oktette der IP-Adresse werden vor der Speicherung entfernt</li>
+        <li style="margin-bottom:0.4rem;">Kein Cross-Site-Tracking, kein Fingerprinting</li>
+        <li style="margin-bottom:0.4rem;">„Do Not Track"-Browser-Einstellung wird respektiert</li>
+        <li style="margin-bottom:0.4rem;">Daten werden nach 13 Monaten automatisch gelöscht</li>
+        <li style="margin-bottom:0.4rem;">Keine Weitergabe an Werbenetze oder Dritte</li>
+      </ul>
+      <p>
+        <strong style="color:var(--text);">Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).
+        Die Analyse-Cookies werden nur nach deiner expliziten Zustimmung über unser Cookie-Banner gesetzt.
+      </p>
+
+      <div class="callout warning" role="note">
+        <p class="callout-title"><i class="bi bi-x-circle" aria-hidden="true"></i> Kein Google Analytics</p>
+        <p>Wir verwenden kein Google Analytics, Google Tag Manager, Facebook Pixel oder
+        vergleichbare Drittanbieter-Tracking-Dienste, die Daten in Drittländer übertragen.</p>
+      </div>
+    </section>
+
+    <!-- § 8 Drittanbieter -->
+    <section class="prv-section" id="drittanbieter" aria-labelledby="h-drittanbieter">
+      <span class="prv-label">§ 8</span>
+      <h2 id="h-drittanbieter">Drittanbieter &amp; externe Dienste</h2>
+      <div class="rune-divider" aria-hidden="true">⚔</div>
+      <p>
+        Diese Website bindet folgende externe Dienste ein. Bei jedem Seitenaufruf
+        kann eine Verbindung zu den Servern dieser Anbieter hergestellt werden,
+        wodurch technisch bedingt deine IP-Adresse übertragen wird:
+      </p>
+
+      <div style="overflow-x:auto;">
+        <table class="data-table" aria-label="Eingebundene Drittanbieter">
+          <thead>
+            <tr>
+              <th scope="col">Dienst</th>
+              <th scope="col">Zweck</th>
+              <th scope="col">Anbieter / Sitz</th>
+              <th scope="col">Rechtsgrundlage</th>
+              <th scope="col">Datenschutz</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Google Fonts</td>
+              <td>Schriftarten (Uncial Antiqua, Crimson Text)</td>
+              <td>Google LLC, USA — EU-Standardvertragsklauseln</td>
+              <td><span class="legal-basis">Art. 6 Abs. 1 lit. f DSGVO</span></td>
+              <td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com</a></td>
+            </tr>
+            <tr>
+              <td>Bootstrap CDN (jsDelivr)</td>
+              <td>CSS-Framework, JavaScript</td>
+              <td>Prospect One, Polen — EU-Server</td>
+              <td><span class="legal-basis">Art. 6 Abs. 1 lit. f DSGVO</span></td>
+              <td><a href="https://www.jsdelivr.com/privacy-policy-jsdelivr-net" target="_blank" rel="noopener noreferrer">jsdelivr.com/privacy</a></td>
+            </tr>
+            <tr>
+              <td>Stripe</td>
+              <td>Zahlungsabwicklung (Kreditkarte)</td>
+              <td>Stripe Payments Europe Ltd., Irland</td>
+              <td><span class="legal-basis">Art. 6 Abs. 1 lit. b DSGVO</span></td>
+              <td><a href="https://stripe.com/de/privacy" target="_blank" rel="noopener noreferrer">stripe.com/privacy</a></td>
+            </tr>
+            <tr>
+              <td>PayPal</td>
+              <td>Zahlungsabwicklung (PayPal)</td>
+              <td>PayPal (Europe) S.à r.l., Luxemburg</td>
+              <td><span class="legal-basis">Art. 6 Abs. 1 lit. b DSGVO</span></td>
+              <td><a href="https://www.paypal.com/de/webapps/mpp/ua/privacy-full" target="_blank" rel="noopener noreferrer">paypal.com/privacy</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin-top:1rem; color:var(--text-dim); font-size:0.95rem;">
+        Für die Übertragung von Daten in Drittländer (insb. USA) stützen wir uns auf
+        EU-Standardvertragsklauseln (SCCs) gemäß Art. 46 Abs. 2 lit. c DSGVO.
+      </p>
+    </section>
+
+    <!-- § 9 Speicherdauer -->
+    <section class="prv-section" id="speicherdauer" aria-labelledby="h-speicherdauer">
+      <span class="prv-label">§ 9</span>
+      <h2 id="h-speicherdauer">Speicherdauer</h2>
+      <div class="rune-divider" aria-hidden="true">⚔</div>
+      <p>
+        Wir löschen personenbezogene Daten, sobald der Zweck der Verarbeitung entfallen
+        ist und keine gesetzlichen Aufbewahrungspflichten entgegenstehen:
+      </p>
+      <ul style="color:var(--text-dim); padding-left:1.4rem;">
+        <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Server-Logfiles:</strong> 7 Tage, danach automatische Löschung</li>
+        <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Kontaktformular-Daten:</strong> 3 Jahre nach Abschluss der Kommunikation</li>
+        <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Rechnungs- &amp; Kaufdaten:</strong> 7 Jahre (gesetzliche Aufbewahrungspflicht gem. BAO/UGB)</li>
+        <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Download-Logs:</strong> 30 Tage, danach anonymisiert</li>
+        <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Analyse-Daten (Matomo):</strong> 13 Monate, danach automatische Löschung</li>
+        <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Newsletter-Daten:</strong> Bis zum Widerruf der Einwilligung; der Einwilligungsnachweis 3 Jahre nach Widerruf</li>
+        <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Cookie-Einwilligung:</strong> 1 Jahr</li>
+      </ul>
+    </section>
+
+    <!-- § 10 Rechte -->
+    <section class="prv-section" id="rechte" aria-labelledby="h-rechte">
+      <span class="prv-label">§ 10</span>
+      <h2 id="h-rechte">Deine Rechte</h2>
+      <div class="rune-divider" aria-hidden="true">⚔</div>
+      <p>
+        Als betroffene Person stehen dir gemäß DSGVO (Art. 15–22) folgende Rechte zu.
+        Zur Ausübung deiner Rechte wende dich an:
+        <a href="mailto:datenschutz@eternalchivalry-interactive.at">datenschutz@eternalchivalry-interactive.at</a>
+      </p>
+
+      <div class="rights-grid" role="list" aria-label="Deine Datenschutzrechte">
+        <div class="right-card" role="listitem">
+          <i class="bi bi-eye" aria-hidden="true"></i>
+          <h4>Auskunft (Art. 15)</h4>
+          <p>Du kannst jederzeit Auskunft über die zu deiner Person gespeicherten Daten verlangen.</p>
+        </div>
+        <div class="right-card" role="listitem">
+          <i class="bi bi-pencil-square" aria-hidden="true"></i>
+          <h4>Berichtigung (Art. 16)</h4>
+          <p>Unrichtige Daten müssen wir auf deine Aufforderung hin unverzüglich berichtigen.</p>
+        </div>
+        <div class="right-card" role="listitem">
+          <i class="bi bi-trash3" aria-hidden="true"></i>
+          <h4>Löschung (Art. 17)</h4>
+          <p>Du kannst die Löschung deiner Daten verlangen, soweit keine gesetzliche Pflicht zur Aufbewahrung besteht.</p>
+        </div>
+        <div class="right-card" role="listitem">
+          <i class="bi bi-pause-circle" aria-hidden="true"></i>
+          <h4>Einschränkung (Art. 18)</h4>
+          <p>Du kannst die Einschränkung der Verarbeitung verlangen, z. B. während der Prüfung einer Berichtigung.</p>
+        </div>
+        <div class="right-card" role="listitem">
+          <i class="bi bi-download" aria-hidden="true"></i>
+          <h4>Datenübertragbarkeit (Art. 20)</h4>
+          <p>Du kannst deine Daten in einem gängigen Format (z. B. JSON/CSV) erhalten oder übertragen lassen.</p>
+        </div>
+        <div class="right-card" role="listitem">
+          <i class="bi bi-x-octagon" aria-hidden="true"></i>
+          <h4>Widerspruch (Art. 21)</h4>
+          <p>Du kannst der Verarbeitung auf Basis berechtigter Interessen jederzeit widersprechen.</p>
+        </div>
+        <div class="right-card" role="listitem">
+          <i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i>
+          <h4>Widerruf der Einwilligung (Art. 7)</h4>
+          <p>Einwilligungen können jederzeit mit Wirkung für die Zukunft widerrufen werden.</p>
+        </div>
+        <div class="right-card" role="listitem">
+          <i class="bi bi-flag" aria-hidden="true"></i>
+          <h4>Beschwerderecht (Art. 77)</h4>
+          <p>Du kannst Beschwerde bei der österreichischen Datenschutzbehörde (DSB) einlegen.</p>
+        </div>
+      </div>
+
+      <div style="background:var(--surface); border:1px solid var(--border); padding:1.25rem 1.5rem; margin-top:1rem;">
+        <p style="margin:0; font-size:0.95rem; color:var(--text-dim);">
+          <strong style="color:var(--text);">Österreichische Datenschutzbehörde (DSB)</strong><br>
+          Barichgasse 40–42, 1030 Wien<br>
+          <a href="https://www.dsb.gv.at" target="_blank" rel="noopener noreferrer">dsb.gv.at</a> &nbsp;·&nbsp;
+          <a href="mailto:dsb@dsb.gv.at">dsb@dsb.gv.at</a> &nbsp;·&nbsp;
+          Tel.: +43 1 531 15-202533
+        </p>
+      </div>
+    </section>
+
+    <!-- § 11 Datensicherheit -->
+    <section class="prv-section" id="sicherheit" aria-labelledby="h-sicherheit">
+      <span class="prv-label">§ 11</span>
+      <h2 id="h-sicherheit">Datensicherheit</h2>
+      <div class="rune-divider" aria-hidden="true">⚔</div>
+      <p>
+        Wir setzen technische und organisatorische Maßnahmen (TOMs) ein, um deine Daten
+        vor unbefugtem Zugriff, Verlust oder Manipulation zu schützen:
+      </p>
+      <ul style="color:var(--text-dim); padding-left:1.4rem;">
+        <li style="margin-bottom:0.4rem;"><strong style="color:var(--text);">TLS/HTTPS:</strong> Alle Datenübertragungen sind Ende-zu-Ende verschlüsselt (TLS 1.3).</li>
+        <li style="margin-bottom:0.4rem;"><strong style="color:var(--text);">Zugriffskontrolle:</strong> Nur autorisierte Mitarbeiter haben Zugang zu personenbezogenen Daten.</li>
+        <li style="margin-bottom:0.4rem;"><strong style="color:var(--text);">Server-Standort:</strong> Alle Server stehen in der EU (Wien / Frankfurt).</li>
+        <li style="margin-bottom:0.4rem;"><strong style="color:var(--text);">Passwort-Hashing:</strong> Passwörter werden ausschließlich als gesaltete Hashes (bcrypt) gespeichert.</li>
+        <li style="margin-bottom:0.4rem;"><strong style="color:var(--text);">Regelmäßige Backups:</strong> Tägliche verschlüsselte Backups auf getrennten Systemen.</li>
+        <li style="margin-bottom:0.4rem;"><strong style="color:var(--text);">Datenpannen:</strong> Im Fall einer Datenpanne informieren wir betroffene Personen und die DSB gemäß Art. 33–34 DSGVO fristgerecht.</li>
+      </ul>
+    </section>
+
+    <!-- § 12 Änderungen -->
+    <section class="prv-section" id="aenderungen" aria-labelledby="h-aenderungen">
+      <span class="prv-label">§ 12</span>
+      <h2 id="h-aenderungen">Änderungen dieser Datenschutzerklärung</h2>
+      <div class="rune-divider" aria-hidden="true">⚔</div>
+      <p>
+        Wir behalten uns das Recht vor, diese Datenschutzerklärung bei Bedarf anzupassen,
+        um sie an geänderte rechtliche Anforderungen oder neue Verarbeitungsvorgänge
+        anzupassen. Die jeweils aktuelle Version ist auf dieser Seite abrufbar.
+        Das Datum der letzten Änderung ist am Anfang dieser Seite angegeben.
+      </p>
+      <p>
+        Bei wesentlichen Änderungen, die deine Rechte oder die Art der Datenverarbeitung
+        maßgeblich berühren, werden wir dich per E-Mail informieren, sofern wir deine
+        E-Mail-Adresse gespeichert haben.
+      </p>
+    </section>
+
+    <!-- § 13 Kontakt DSB -->
+    <section class="prv-section" id="kontakt-ds" aria-labelledby="h-kontakt-ds">
+      <span class="prv-label">§ 13</span>
+      <h2 id="h-kontakt-ds">Kontakt für Datenschutzanfragen</h2>
+      <div class="rune-divider" aria-hidden="true">⚔</div>
+      <p>
+        Für alle Fragen, Auskunftsersuchen oder die Ausübung deiner Betroffenenrechte
+        wende dich bitte an:
+      </p>
+      <div style="background:var(--surface); border:1px solid var(--border); padding:1.5rem; margin-top:1rem;">
+        <p style="margin:0; line-height:2.2; color:var(--text);">
+          <strong style="color:var(--gold-light);">EternalChivalry Interactive e.U. — Datenschutz</strong><br>
+          <i class="bi bi-envelope me-2" style="color:var(--text-dim)" aria-hidden="true"></i>
+          <a href="mailto:datenschutz@eternalchivalry-interactive.at">datenschutz@eternalchivalry-interactive.at</a><br>
+          <i class="bi bi-geo-alt me-2" style="color:var(--text-dim)" aria-hidden="true"></i>
+          Musterstraße 12, 1010 Wien, Österreich<br>
+          <i class="bi bi-clock me-2" style="color:var(--text-dim)" aria-hidden="true"></i>
+          Antwortzeit: binnen <strong>30 Tagen</strong> gemäß Art. 12 Abs. 3 DSGVO
+        </p>
+      </div>
+      <p style="margin-top:1rem; color:var(--text-dim); font-size:0.95rem;">
+        Zur Identifikation bei Auskunftsersuchen kann ein Nachweis deiner Identität
+        erforderlich sein. Dies dient dem Schutz deiner Daten vor unbefugtem Zugriff Dritter.
+      </p>
+    </section>
+
+  </main>
+</div>
+
+<!-- ═══════════════════ FOOTER ════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <p class="footer-brand">⚔ Medieval: Escape The Dungeon</p>
+        <p style="font-size:0.88rem; color:var(--text-dim); font-style:italic; margin-top:0.25rem;">
+          Into the dark age — Out of the dungeon
+        </p>
+        <p style="font-size:0.85rem; color:var(--text-dim); margin-top:0.75rem;">
+          © 2024 EternalChivalry Interactive e.U.<br>Alle Rechte vorbehalten.
+        </p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <p class="footer-heading">Navigation</p>
+        <ul class="footer-links">
+          <li><a href="../index.html">Startseite</a></li>
+          <li><a href="../index.html#features">Features</a></li>
+          <li><a href="../index.html#pricing">Kaufen</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <p class="footer-heading">Unternehmen</p>
+        <ul class="footer-links">
+          <li><a href="about.html">Über uns</a></li>
+          <li><a href="contact.html">Kontakt</a></li>
+          <li><a href="contact.html#impressum">Impressum</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <p class="footer-heading">Rechtliches</p>
+        <ul class="footer-links">
+          <li><a href="license.html">Lizenz</a></li>
+          <li><a href="privacy.html" aria-current="page">Datenschutz</a></li>
+          <li><a href="accessibility.html">Barrierefreiheit</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom d-flex flex-wrap justify-content-between gap-2">
+      <span>© 2024 EternalChivalry Interactive e.U. · Wien, Österreich</span>
+      <span>
+        <a href="privacy.html">Datenschutz</a> ·
+        <a href="license.html">Lizenz</a> ·
+        <a href="accessibility.html">Barrierefreiheit</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  /* ── Opt-out mock ────────────────────────────────────── */
+  function showOptOut() {
+    document.getElementById('optOutMsg').style.display = 'block';
+  }
+
+  /* ── Active TOC on scroll ────────────────────────────── */
+  const sections = document.querySelectorAll('.prv-section');
+  const tocLinks = document.querySelectorAll('.toc-list a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        tocLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
