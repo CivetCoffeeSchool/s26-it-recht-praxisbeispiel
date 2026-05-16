@@ -5,7 +5,7 @@
 Definieren Sie das Softwareprodukt (Businessanwendung, Videospiel, …) welches Sie im Internet vertreiben.
 
 A: Singleplayer Jump and run Videospiel: 
-Medieval Escape
+Escape The Medieval Dungeon
 
 - Welche Funktionen hat Ihre Anwendung?
   A: 
